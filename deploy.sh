@@ -11,7 +11,7 @@ set -e
 # Set repo based on current branch, by default master=production, develop=staging
 # @todo support custom branches
 
-if [ "$CI_BRANCH" == "master" ]
+if [ "$CI_BRANCH" == "master" && "main" ]
 then
     target_wpe_install=${WPE_PROD_INSTALL}
 else
@@ -35,7 +35,7 @@ cd ~/clone
 # Get official list of files/folders that are not meant to be on production if $EXCLUDE_LIST is not set.
 if [[ -z "${EXCLUDE_LIST}" ]];
 then
-    wget https://raw.githubusercontent.com/HOP-Software/wpengine-codeship-continuous-deployment/master/exclude-list.txt
+    wget https://raw.githubusercontent.com/HOP-Software/wpengine-codeship-continuous-deployment/main/exclude-list.txt
 else
     # @todo validate proper url?
     wget ${EXCLUDE_LIST}
@@ -83,7 +83,7 @@ fi
 
 # Move the gitignore file to the deployments folder
 cd ~/deployment
-wget --output-document=.gitignore https://raw.githubusercontent.com/HOP-Software/wpengine-codeship-continuous-deployment/master/gitignore-template.txt
+wget --output-document=.gitignore https://raw.githubusercontent.com/HOP-Software/wpengine-codeship-continuous-deployment/main/gitignore-template.txt
 
 # Delete plugins and theme if it exists, and move cleaned version into deployment folder
 if [ "$PROJECT_TYPE" == "theme" ]
