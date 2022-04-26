@@ -11,12 +11,9 @@ set -e
 # Set repo based on current branch, by default master=production, develop=staging
 # @todo support custom branches
 
-if [ "$CI_BRANCH" == "master"]
+if [ "$CI_BRANCH" == "master" && "main" ]
 then
     target_wpe_install=${WPE_PROD_INSTALL}
-elif [ "$CI_BRANCH" == "staging"]
-then
-    target_wpe_install=${WPE_STAGING_INSTALL}
 else
     target_wpe_install=${WPE_DEV_INSTALL}
 fi
