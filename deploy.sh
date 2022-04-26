@@ -149,4 +149,4 @@ git config core.ignorecase false
 git add --all
 git commit -am "Deployment to ${target_wpe_install} production by $CI_COMMITTER_NAME from $CI_NAME"
 
-git push ${force} production master && git push ${force} production main
+git push ${force} production master
