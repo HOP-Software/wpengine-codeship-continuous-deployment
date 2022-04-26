@@ -2,10 +2,6 @@
 
 Love WordPress? Love WP Engine and want to take advantage of their git deployment but need to have more flexiblity to deploy multiple repos? This script will assist you in automatically deploying WordPress plugins and themes to [WP Engine .git deployment](https://wpengine.com/git/) using [Codeship](https://codeship.com) or other deployment services.
 
-At [Linchpin](https://linchpin.agency) we use [WP Engine](https://www.wpengine.com) and [Codeship](https://www.codeship.com) and love both. Hopefully you find this shell script useful.
-
-For a more indepth walk through please visit [this article](https://linchpin.agency/blog/continuous-deployment-wp-engine-codeship/?utm_source=github&utm_medium=deployments&utm_campaign=wpengine) on the Linchpin site.
-
 # Beta Public Release Version 1.0
 
 ### The instructions and the deployment script assumes the following
@@ -14,15 +10,6 @@ For a more indepth walk through please visit [this article](https://linchpin.age
 * You understand how to setup [.git deployments on WP Engine](https://wpengine.com/git/) already.
 * You are using the **master** branch of your repo for **production**
 * You are using the **develop** branch of your repo for **staging**
-
-### How do I get set up?
-
-* [Preflight Repo Setup](https://github.com/linchpin/wpengine-codeship-continuous-deployment#preflight-repo-setup)
-* [Configuration](https://github.com/linchpin/wpengine-codeship-continuous-deployment#configuration)
-* [Codeship Environment Variables](https://github.com/linchpin/wpengine-codeship-continuous-deployment#codeship-environment-variables)
-* Deployment instructions
-* [Useful notes](https://github.com/linchpin/wpengine-codeship-continuous-deployment#useful-notes)
-* What this repo needs
 
 ### Preflight Repo Setup
 
@@ -34,7 +21,6 @@ When creating your repo, it's important to name the repo using proper folder str
 
 1. Log into **codeship.com** or your deployment method of choice.
 2. Connect your **bitbucket**, **github** or **gitlab** repo to codeship. (You will need to authorize access to your repo)
-3. Setup [Environment Variables](https://github.com/linchpin/wpengine-codeship-continuous-deployment#codeship-environment-variables)
     * Environment variables are a great way to add flexibility to the script with out having variables hard coded within this script.
     * You should never have any credentials stored within this or any other repo.
 4. Create deployment pipeline for each branch you are going to add automated deployments to **"master"** and **"staging"**. The pipelines you create are going to utilize the **deployment script below**
@@ -60,8 +46,6 @@ You can customize the actions taken by the deployment script by utilizing the fo
 
 ## Deployment Instructions (The Script)
 
-The below build script(s) will check out the linchpin build scripts from github and then run the shell script accordingly based on the environment variables.
-
 In the script below you will see this script is specifcally for **master** if you wanted to use this for staging you would setup a deployment that targets **develop** specifically.
 
 ### deploying to your pipeline (master|develop)
@@ -69,8 +53,8 @@ In the script below you will see this script is specifcally for **master** if yo
 In order to deploy to your pipeline you can use the following command regardless of master, develop or a custom branch. We are utilizing `https` instead of `SSH` so we can `git clone` the deployment script without requiring authentication.
 
 ```
-# load our build script from the linchpin repo
-git clone --branch "master" --depth 50 https://github.com/linchpin/wpengine-codeship-continuous-deployment.git
+# load our build script from the HOP-Software repo
+git clone --branch "master" --depth 50 https://github.com/HOP-Software/wpengine-codeship-continuous-deployment.git
 chmod 555 ./wpengine-codeship-continuous-deployment/deploy.sh
 ./wpengine-codeship-continuous-deployment/deploy.sh
 ```
